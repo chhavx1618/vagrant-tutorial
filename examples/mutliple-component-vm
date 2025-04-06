@@ -1,0 +1,24 @@
+# Vagrantfile - Backend, Frontend, DB
+Vagrant.configure("2") do |config|
+  {
+    "frontend" => "192.168.56.11",
+    "backend"  => "192.168.56.12",
+    "db"       => "192.168.56.13"
+  }.each do |name, ip|
+    config.vm.define name do |node|
+      node.vm.box = "ubuntu/jammy64"
+      node.vm.hostname = name
+      node.vm.network "private_network", ip: ip
+
+      node.vm.provision "shell", inline: <<-SHELL
+        echo "Provisioning #{name}"
+        sudo apt update
+        case "#{name}" in
+          "frontend") sudo apt install -y nginx ;;
+          "backend") sudo apt install -y nodejs npm ;;
+          "db") sudo apt install -y mysql-server ;;
+        esac
+      SHELL
+    end
+  end
+end

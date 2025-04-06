@@ -1,0 +1,19 @@
+# Vagrantfile - Azure Provisioning
+Vagrant.configure("2") do |config|
+  config.vm.box = "azure"
+  config.vm.provider :azure do |azure|
+    azure.tenant_id = "YOUR_TENANT_ID"
+    azure.client_id = "YOUR_CLIENT_ID"
+    azure.client_secret = "YOUR_CLIENT_SECRET"
+    azure.subscription_id = "YOUR_SUBSCRIPTION_ID"
+    azure.vm_name = "azurevm"
+    azure.vm_size = "Standard_B1s"
+    azure.image_urn = "Canonical:UbuntuServer:22_04-lts:latest"
+    azure.location = "eastus"
+    azure.resource_group_name = "myResourceGroup"
+  end
+
+  config.vm.provision "shell", inline: <<-SHELL
+    sudo apt update && sudo apt install -y nginx
+  SHELL
+end

@@ -192,9 +192,15 @@ Below is a categorized list of the most commonly used Vagrant commands.
 
 Here are a few example Vagrantfile snippets to help you get started:
 
-1. Basic - ubuntu 22.
-2. AWS 
-3. 
+1. [Basic - ubuntu 22.](/examples/basic-ubuntu)
+2. AWS provisioning
+3. Azure provisioning
+4. Multiple VMs provisioned together
+5. Multiple components (backend, frontend, database)
+6. Load Balancing setup
+7. Servers with high availibility.
+
+Ensure that you save the particular file you need as the singular vagrantfile in your folder.
 
 ### Basic Vagrantfile
 

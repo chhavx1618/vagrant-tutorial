@@ -1,0 +1,34 @@
+# Vagrantfile - Load Balancer + App Servers
+Vagrant.configure("2") do |config|
+  config.vm.define "loadbalancer" do |lb|
+    lb.vm.box = "ubuntu/jammy64"
+    lb.vm.network "private_network", ip: "192.168.56.10"
+    lb.vm.provision "shell", inline: <<-SHELL
+      sudo apt update
+      sudo apt install -y haproxy
+      echo "
+      frontend http_front
+          bind *:80
+          default_backend http_back
+
+      backend http_back
+          balance roundrobin
+          server web1 192.168.56.11:80 check
+          server web2 192.168.56.12:80 check
+      " | sudo tee /etc/haproxy/haproxy.cfg
+      sudo systemctl restart haproxy
+    SHELL
+  end
+
+  (1..2).each do |i|
+    config.vm.define "web#{i}" do |web|
+      web.vm.box = "ubuntu/jammy64"
+      web.vm.network "private_network", ip: "192.168.56.1#{i}"
+      web.vm.provision "shell", inline: <<-SHELL
+        sudo apt update
+        sudo apt install -y nginx
+        echo "Welcome to web#{i}" | sudo tee /var/www/html/index.html
+      SHELL
+    end
+  end
+end

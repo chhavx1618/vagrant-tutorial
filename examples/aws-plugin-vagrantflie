@@ -1,0 +1,19 @@
+# Vagrantfile - AWS Provisioning
+Vagrant.configure("2") do |config|
+  config.vm.provider :aws do |aws, override|
+    aws.access_key_id = "YOUR_ACCESS_KEY"
+    aws.secret_access_key = "YOUR_SECRET_KEY"
+    aws.keypair_name = "your-keypair"
+    aws.ami = "ami-0abcdef1234567890"
+    aws.instance_type = "t2.micro"
+    aws.region = "us-west-2"
+
+    override.ssh.username = "ubuntu"
+    override.ssh.private_key_path = "~/.ssh/your-key.pem"
+  end
+
+  config.vm.provision "shell", inline: <<-SHELL
+    sudo apt-get update
+    echo "AWS instance provisioned."
+  SHELL
+end

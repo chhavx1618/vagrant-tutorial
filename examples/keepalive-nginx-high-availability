@@ -1,0 +1,32 @@
+# Vagrantfile - High Availability with Keepalived
+Vagrant.configure("2") do |config|
+  ["master", "backup"].each_with_index do |name, i|
+    config.vm.define name do |node|
+      node.vm.box = "ubuntu/jammy64"
+      node.vm.network "private_network", ip: "192.168.56.1#{i+1}"
+      node.vm.hostname = name
+      node.vm.provision "shell", inline: <<-SHELL
+        sudo apt update
+        sudo apt install -y nginx keepalived
+
+        echo "
+vrrp_instance VI_1 {
+    state #{name == 'master' ? 'MASTER' : 'BACKUP'}
+    interface eth1
+    virtual_router_id 51
+    priority #{name == 'master' ? 101 : 100}
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass secret
+    }
+    virtual_ipaddress {
+        192.168.56.100
+    }
+}" | sudo tee /etc/keepalived/keepalived.conf
+
+        sudo systemctl restart keepalived
+      SHELL
+    end
+  end
+end
