@@ -1,4 +1,4 @@
-# Vagrant
+# Vagrant Tutorial
 
 This repository is a collection of various Vagrant files along with a comprehensive tutorial to help you get started with Vagrant. Whether you’re a beginner or an experienced developer, this guide will walk you through the basics and beyond.
 
@@ -16,7 +16,6 @@ This repository is a collection of various Vagrant files along with a comprehens
     - [Cloud Provisioners](#cloud-provisioners)
 6. [Example Vagrantfiles](#example-vagrantfiles)
 7. [Additional Resources and Links](#additional-resources-and-links)
-8. [Troubleshooting & FAQ](#troubleshooting--faq)
 
 ---
 
@@ -54,13 +53,11 @@ Vagrant uses a simple file called the **Vagrantfile** to describe the configurat
 
 Open your terminal (or Command Prompt) and type:
 
-```sh
-vagrant
+`vagrant`
+
 If you see an output similar to the following, your installation has been successful:
 
-sh
-Copy
-Edit
+```sh
 Usage: vagrant [options] <command> [<args>]
 
     -h, --help                       Print this help.
@@ -100,6 +97,8 @@ Common commands:
 For help on any individual command run:
 vagrant COMMAND -h
 ``` 
+
+As you can see, the CLI already comes with a list of all commands that you can run.
 ---
 
 
@@ -193,6 +192,10 @@ Below is a categorized list of the most commonly used Vagrant commands.
 
 Here are a few example Vagrantfile snippets to help you get started:
 
+1. Basic - ubuntu 22.
+2. AWS 
+3. 
+
 ### Basic Vagrantfile
 
 ```ruby
@@ -209,10 +212,11 @@ Vagrant.configure("2") do |config|
     sudo apt-get install -y apache2
   SHELL
 end
+```
+
 Vagrantfile for Cloud Provisioning (AWS Example)
-ruby
-Copy
-Edit
+
+```ruby
 Vagrant.configure("2") do |config|
   config.vm.box = "dummy"  # Dummy box, not used by AWS provider
 
@@ -231,3 +235,13 @@ Vagrant.configure("2") do |config|
   # Provisioning commands
   config.vm.provision "shell", inline: "echo 'Provisioning on AWS!'"
 end
+```
+
+## Additional Resources and Links
+
+1. [Official Documentation](https://developer.hashicorp.com/vagrant/docs)
+2. [Install Vagrant](https://developer.hashicorp.com/vagrant/install)
+3. [Youtube References](https://www.youtube.com/playlist?list=PLhW3qG5bs-L9S272lwi9encQOL9nMOnRa)
+
+
+Thank you for reading. If you have any doubts or issues or have found some inconsistencies or incorrect information in this repository, I encourage you to add it to the "issues" of this repository.
