@@ -192,13 +192,14 @@ Below is a categorized list of the most commonly used Vagrant commands.
 
 Here are a few example Vagrantfile snippets to help you get started:
 
-1. [Basic - ubuntu 22.](/examples/basic-ubuntu)
-2. AWS provisioning
-3. Azure provisioning
-4. Multiple VMs provisioned together
-5. Multiple components (backend, frontend, database)
-6. Load Balancing setup
-7. Servers with high availibility.
+1. [Basic - ubuntu 22](/examples/basic-ubuntu)  
+2. [AWS provisioning](/examples/aws-plugin-vagrantfile)  
+3. [Azure provisioning](/examples/azure-vagrant-file)  
+4. [Multi-VM setup](/examples/multiple-vm-same-os)  
+5. [Full stack (frontend, backend, db)](/examples/multiple-component-vm)  
+6. [Load balancing setup](/examples/lb-ha-proxy-vagrantfile)  
+7. [High availability servers](/examples/keepalive-nginx-high-availability)
+
 
 Ensure that you save the particular file you need as the singular vagrantfile in your folder.
 
@@ -248,6 +249,8 @@ end
 1. [Official Documentation](https://developer.hashicorp.com/vagrant/docs)
 2. [Install Vagrant](https://developer.hashicorp.com/vagrant/install)
 3. [Youtube References](https://www.youtube.com/playlist?list=PLhW3qG5bs-L9S272lwi9encQOL9nMOnRa)
+
+
 
 
 Thank you for reading. If you have any doubts or issues or have found some inconsistencies or incorrect information in this repository, I encourage you to add it to the "issues" of this repository.
