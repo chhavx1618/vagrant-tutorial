@@ -203,46 +203,7 @@ Here are a few example Vagrantfile snippets to help you get started:
 
 Ensure that you save the particular file you need as the singular vagrantfile in your folder.
 
-### Basic Vagrantfile
-
-```ruby
-Vagrant.configure("2") do |config|
-  # Base box for Linux
-  config.vm.box = "ubuntu/bionic64"
-
-  # Configure network port forwarding
-  config.vm.network "forwarded_port", guest: 80, host: 8080
-
-  # Provisioning using a shell script
-  config.vm.provision "shell", inline: <<-SHELL
-    sudo apt-get update
-    sudo apt-get install -y apache2
-  SHELL
-end
-```
-
-Vagrantfile for Cloud Provisioning (AWS Example)
-
-```ruby
-Vagrant.configure("2") do |config|
-  config.vm.box = "dummy"  # Dummy box, not used by AWS provider
-
-  # AWS provider configuration
-  config.vm.provider :aws do |aws, override|
-    aws.access_key_id = "YOUR_AWS_ACCESS_KEY"
-    aws.secret_access_key = "YOUR_AWS_SECRET_KEY"
-    aws.ami = "ami-12345678"
-    aws.instance_type = "t2.micro"
-
-    # Optional: SSH key and security group settings
-    aws.keypair_name = "your-keypair"
-    aws.security_groups = ["default"]
-  end
-
-  # Provisioning commands
-  config.vm.provision "shell", inline: "echo 'Provisioning on AWS!'"
-end
-```
+---
 
 ## Additional Resources and Links
 
